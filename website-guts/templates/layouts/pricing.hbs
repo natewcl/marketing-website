@@ -1,6 +1,21 @@
 ---
 layout: wrapper.hbs
-layout_script: false
+menu_items:
+- text: "your website..."
+  url: "/pricing"
+- text: "Agencies"
+  url: "/partners"
+- text: "Developers"
+  url: "http://developers.optimizely.com/"
+- text: "E-commerce"
+  url: "/ecommerce"
+- text: "Enterprises"
+  url: "/enterprises"
+- text: "Publishers"
+  url: "/publishers"
+- text: "Small Business"
+  url: "/small-business"
+layout_script: pricing.js
 layout_body_class: false
 page_navigation:
 -
@@ -16,10 +31,16 @@ page_navigation:
             <div class="clearfix page-subheader-cont">
                 <h1>{{page.visible_title}}</h1>
                 <ul class="sub-header-nav">
-                    {{#each page_navigation}}
-                    <li><a href="{{#isUrl url}}{{../../linkPath}}{{/isUrl}}{{url}}">{{text}}</a></li>
-                    {{/each}}
-                    <li>Optimizely for:</li>
+                    <li><a href="{{linkPath}}/pricing" class="pricing">Plans and Pricing</a></li>
+                    <li><a href="{{linkPath}}/benefits" class="benefits">Benefits</a></li>
+                    <li class="dropdown SL_hide">
+                        <span class="for-menu-label">Optimizely for: </span>
+                        <ul class="for-menu" data-current="{{dirname}}">
+                            {{#menu_items}}
+                            <li><a href="{{#isUrl url}}{{../../linkPath}}{{/isUrl}}{{url}}"{{#class}} class="{{.}}"{{/class}}>{{text}}</a></li>
+                            {{/menu_items}}
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>

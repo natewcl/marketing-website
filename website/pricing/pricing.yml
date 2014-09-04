@@ -213,7 +213,7 @@ levels:
   -
     title: "Platinum"
     monthly_visitors: 200000
-    cost_additional_visitors: "As many monthly visitors as you need"
+    cost_additional_visitors: "As many monthly visitors <br>as you need"
     number_experiments: "Unlimited experiments"
     features:
       -

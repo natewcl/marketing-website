@@ -3,7 +3,7 @@ layout: pricing.hbs
 seo_title: Pricing
 visible_title: Plans and Pricing
 body_class:
-- pricing
+- pricing-page
 ---
 
 <div class="row">
@@ -17,103 +17,117 @@ body_class:
   </div>
 </div>
 
-<div class="price-table">
-  <div class="pricing-col-wrapper">
+<div class="price-table row">
   {{#each pricing.levels}}
-    <div class="pricing-col">
+  <div class="pricing-col columns one-fourth">
 
-      <div class="main-box">
-        <h2>{{ title }}</h2>
-        <div class="box-content">
+    <div class="main-box">
+      <h2>{{ title }}</h2>
+      <div class="box-content">
+        {{#notEqual title 'Platinum' }}
+        <h3 class="pricing-trial-text">
+          30 day free trial then
+          <span><sup>$</sup>{{monthly_price}}</span>
+          per month after trial period
+        </h3>
+        <h4>{{ save_text }}</h4>
+        {{/notEqual}}
+        {{#equal title 'Platinum' }}
+        <h3 class="pricing-trial-text platinum">
+          <span>Get a Demo</span>
+          1-800-252-9480
+        </h3>
+        {{/equal}}
+      </div>
+        <div class="button-cont">
           {{#notEqual title 'Platinum' }}
-          <h3 class="pricing--trial-text">
-            30 day free trial then
-            <span><sup>$</sup>{{monthly_price}}</span>
-            per month after trial period
-          </h3>
-          <h4>{{ save_text }}</h4>
+          <a class="primary-button" href="#">
+          Get Started
+          </a>
           {{/notEqual}}
           {{#equal title 'Platinum' }}
-          <h3 class="pricing--trial-text platinum">
-            <span>Get a Demo</span>
-            1-800-252-9480
-          </h3>
+          <a class="primary-button" href="#">
+          Schedule Demo
+          </a>
           {{/equal}}
         </div>
-          <div class="button-cont">
-            {{#notEqual title 'Platinum' }}
-            <a class="primary-button" href="#">
-            Get Started
-            </a>
-            {{/notEqual}}
-            {{#equal title 'Platinum' }}
-            <a class="primary-button" href="#">
-            Schedule Demo
-            </a>
-            {{/equal}}
-          </div>
+    </div>
+
+    <div class="pricing-col-content">
+      <div class="box visitor-content">
+        {{#notEqual title 'Platinum' }}
+        <p>{{addCommas monthly_visitors}} monthly visitors</p>
+        {{/notEqual}}
+        <p>{{{ cost_additional_visitors }}}</p>
+      </div>
+      <div class="box">
+        <p>{{number_experiments}}</p>
+      </div>
+      <div class="box block-header{{#if @first}} first-col-feature{{/if}}">
+        <h2 {{#if @first}}data-title="Platforms"{{/if}}>Platforms</h2>
       </div>
 
-      <div class="pricing-col-content">
-        <div class="box visitor-content">
-          <p>{{addCommas monthly_visitors}} monthly visitors</p>
-          <p>{{ cost_additional_visitors }}</p>
-        </div>
-        <div class="box">
-          <p>{{number_experiments}}</p>
-        </div>
+      <div class="box">
+        <p>Web and Mobile Web</p>
+      </div>
+      <div class="box">
+        <p>iOS (Beta)</p>
+      </div>
 
-        <h2 class="box block-header">Platforms</h2>
-        <div class="box">
-          <p>Web and Mobile Web</p>
-        </div>
-        <div class="box">
-          <p>iOS (Beta)</p>
-        </div>
+      <div class="box block-header{{#if @first}} first-col-feature{{/if}}">
+        <h2 {{#if @first}}data-title="Features" data-sup="1"{{/if}}>
+          Features<sup>1</sup>
+        </h2>
+      </div>
 
-        <h2 class="box block-header">Features<sup>1</sup></h2>
-        {{#features}}
+      {{#features}}
+        {{#if this.feature.value}}
         <div class="box">
-          {{#if this.feature.value}}
           <p>{{this.feature.value}}
             {{#if this.feature.tooltip}}
             <span data-tooltip title="{{ this.feature.tooltip }}"></span>
             {{/if}}
           </p>
-          {{else}}
-          <p class="empty-val">&nbsp;</p>
-          {{/if}}
-
         </div>
-        {{/features}}
+        {{else}}
+        <div class="box empty-val"></div>
+        {{/if}}
+      {{/features}}
 
-        <h2 class="box block-header">Account Management</h2>
-        {{#account_management}}
+      <div class="box block-header{{#if @first}} first-col-feature{{/if}}">
+        <h2 {{#if @first}}data-title="Account Management"{{/if}}>Account Management</h2>
+      </div>
+
+      {{#account_management}}
+        {{#if this.item.value}}
         <div class="box">
-          {{#if this.item.value}}
           <p>{{this.item.value}}
             {{#if this.item.tooltip}}
             <span data-tooltip title="{{ this.item.tooltip }}"></span>
             {{/if}}
           </p>
-          {{else}}
-          <p class="empty-val">&nbsp;</p>
-          {{/if}}
         </div>
-        {{/account_management}}
+        {{else}}
+        <div class="box empty-val"></div>
+        {{/if}}
+      {{/account_management}}
 
-        <h2 class="box block-header">Support & Customer Service <sup>2</sup></h2>
-       {{#support}}
-       <div class="box">
-        {{#if this}}
-         <p>{{this}}</p>
-         {{else}}
-         <p class="empty-val">&nbsp;</p>
-         {{/if}}
-       </div>
-       {{/support}}
+      <div class="box block-header{{#if @first}} first-col-feature last-feature{{/if}}">
+        <h2 {{#if @first}}data-title="Support & Customer Service" data-sup="2"{{/if}}>
+          Support & Customer Service <sup>2</sup>
+        </h2>
       </div>
+
+     {{#support}}
+       {{#if this}}
+       <div class="box">
+         <p>{{this}}</p>
+       </div>
+       {{else}}
+        <div class="box empty-val"></div>
+        {{/if}}
+     {{/support}}
     </div>
-  {{/each}}
   </div>
+  {{/each}}
 </div>

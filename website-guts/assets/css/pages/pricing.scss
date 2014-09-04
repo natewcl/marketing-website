@@ -1,8 +1,96 @@
-.pricing {
+body.pricing-page {
+  .for-menu {
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    border: 1px solid #eee;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    top: -5px;
+    width: 143px;
+    z-index: 19;
+    li {
+      line-height: inherit;
+      margin: 0;
+      display: none;
+      position: relative;
+
+      a {
+        font-size: 13px;
+      }
+
+      &:first-child {
+        background: #f7f7f7;
+        display: block;
+
+        a {
+          color: #006eb6;
+          
+          &:after {
+            content: '\25be';
+            float: right;
+          }
+        }
+      }
+    }
+
+    a {
+      padding: 6px 12px;
+      text-align: left;
+
+      &:hover {
+        color: #006eb6;
+      }
+    }
+    
+    &.shown {
+      li {
+        display: block;
+
+        &:first-child {
+          border-bottom: 1px solid #eee;
+
+          a {
+            color: #006eb6;
+          }
+        }
+      }
+    }
+
+    .hide {
+      display: none;
+    }
+  }
+
+  .for-menu-label {
+    padding-right: 155px;
+    vertical-align: top;
+    font-size: 0.8em;
+    color: #888;
+  }
+
+  .sub-header-nav {
+    .dropdown {
+      display: inline-block;
+    }
+  }
+
+  .attention {
+    a {
+      margin: 10px 0;
+    }
+  }
+
+
   .price-table {
     border: 1px solid #e1e1e1;
     box-shadow: 0 5px 30px transparentize(#000, 0.9);
     margin: 2em 0;
+    .columns {
+      margin: 0;
+    }
   }
   .pill-cont {
     text-align: center;
@@ -11,46 +99,61 @@
     margin: 0 auto;
     width: auto;
   }
-  .pricing-col-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-  }
   .pricing-col {
     width: 100%;
-    @media only screen and (min-width: $desktop-min-width) {
-      width: 25%;
-    }
-    // &:last-child {
-    //   .box {
-    //     //background: #3385D6;
-    //     > * {
-    //       color: #fff;
-    //     }
-    //   }
-    // }
-    .box, {
+    .box {
       text-align: center;
+      vertical-align: middle;
+      height: 38px;
+      overflow: visible;
+      p {
+        line-height: 38px;
+      }
+      &.block-header {
+        height: auto;
+        background: #f8f8f8;
+        color: #6b6b6b;
+        border: none;
+        h2 {
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 30px;
+          margin: 0;
+          text-align: center;
+        }
+      }
+      &.visitor-content {
+        padding: 1.25em 0.5em;
+        height: auto;
+        br {
+          display: none;
+        }
+        p {
+          line-height: 18px;
+        }
+      }
     }
     .empty-val {
       display: none;
-      @media only screen and (min-width: $desktop-min-width) {
-        display: block;
-      }
     }
     .main-box {
-      //padding-bottom: 50px;
-      @media only screen and (min-width: $desktop-min-width) {
-        height: 260px;
-        //padding-bottom: 10px;
+      > * {
+        text-align: center;
+      }
+      .button-cont {
+        padding: 10px 0;
       }
       .box-content {
-        padding: 15px 10px;
+        padding: 0 10px;
+        > * {
+          text-align: center;
+        }
       }
       position: relative;
       h2 {
         color: $darkBlue;
         font-size: 1.7em;
-        margin-bottom: 0.5em;
+        margin: 0.5em 0;
         position: relative;
         &:after {
           content: "";
@@ -61,52 +164,20 @@
           height: 10px;
         }
       }
-      h3 {
-        &.pricing-trial-text.platinum {
-          padding: 10px 0;
-        }
-      }
       h4 {
         font-size: 12px;
         margin: 1em;
       }
-      > * {
-        margin:0;
-        text-align: center;
-      }
-      .button-cont {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        padding: 10px 0;
-      }
     }
   }
   .pricing-col-content {
-    display: flex;
-    flex-direction: column;
     .box {
       border: none;
       border-bottom: solid 1px #f1f1f1;
       padding: 0px 10px;
       position: relative;
-      flex: 1;
-      &.block-header {
-        background: #f8f8f8;
-        color: #6b6b6b;
-        font-size: 14px;
-        font-weight: 500;
-        height: 30px;
-        line-height: 30px;
-        margin: 0;
-        text-align: center;
-      }
       &.visitor-content {
-        padding: 1.25em;
-        p {
-          line-height: 1.25em;
-        }
+        border-top: solid 1px #f1f1f1;
       }
       h4 {
         font-size: 11px;
@@ -115,7 +186,6 @@
         color: #444;
         font-size: 0.75em;
         font-weight: 400;
-        line-height: 38px;
         margin: 0;
       }
       a {
@@ -123,7 +193,7 @@
       }
     }
   }
-  .pricing--trial-text {
+  .pricing-trial-text {
     color: $blue;
     font-size: 12px;
     span {
@@ -131,6 +201,94 @@
       font-size: 30px;
       sup {
         font-size: 20px;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: $desktop-min-width) { 
+  body.pricing-page {
+    .pricing-col {
+      width: 25%;
+      .empty-val {
+        display: block;
+      }
+      .box {
+        position: relative;
+        p {
+          line-height: 26px;
+        }
+        &.visitor-content {
+          br {
+            display: block;
+          }
+        }
+        &.block-header {
+          box-shadow: none;
+          color: transparent;
+          height: 44px;
+          &:last-child {
+            background: blue;
+          }
+          h2 {
+            margin: 0;
+          }
+          &.first-col-feature {
+            h2 {
+              &:before,
+              &:after {
+                position: absolute;
+                color: #000;
+                display: block;
+                width: 400%;
+                height: 100%;
+                z-index: 9999;
+              }
+              &:before {
+                content: attr(data-title);
+                top: 5px;
+                left: -5px;
+              }
+              &:after {
+                content: attr(data-sup);
+                top: 0;
+                left: 30px;
+              }
+            }
+          }
+          &.last-feature {
+            h2 { 
+              &:after {
+                left: 100px;
+              }
+            }
+          }
+        }
+      }
+      .main-box {
+        height: 240px;
+        .box-content {
+          h3 {
+            &.pricing-trial-text.platinum {
+              padding: 10px 0;
+            }
+          }
+        }
+      }
+      .button-cont {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        text-align: center;
+      }
+    }
+    .pricing-col-content {
+      .box {
+        padding: 5px 0;
+        &.visitor-content {
+          border-top: none;
+        }
       }
     }
   }
