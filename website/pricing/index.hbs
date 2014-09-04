@@ -21,28 +21,37 @@ body_class:
   <div class="pricing-col-wrapper">
   {{#each pricing.levels}}
     <div class="pricing-col">
-      <div class="box main-box">
+
+      <div class="main-box">
         <h2>{{ title }}</h2>
-        {{#notEqual title 'Platinum' }}
-        <h3 class="pricing--trial-text">
-          30 day free trial then
-          <span><sup>$</sup>{{monthly_price}}</span>
-          per month after trial period
-        </h3>
-        <h4>{{ save_text }}</h4>
-        <div class="button-cont">
-          <a class="button" href="#">Get Started</a>
+        <div class="box-content">
+          {{#notEqual title 'Platinum' }}
+          <h3 class="pricing--trial-text">
+            30 day free trial then
+            <span><sup>$</sup>{{monthly_price}}</span>
+            per month after trial period
+          </h3>
+          <h4>{{ save_text }}</h4>
+          {{/notEqual}}
+          {{#equal title 'Platinum' }}
+          <h3 class="pricing--trial-text platinum">
+            <span>Get a Demo</span>
+            1-800-252-9480
+          </h3>
+          {{/equal}}
         </div>
-        {{/notEqual}}
-        {{#equal title 'Platinum' }}
-        <h3 class="pricing--trial-text platinum">
-          <span>Get a Demo</span>
-          1-800-252-9480
-        </h3>
-        <div class="button-cont">
-          <a class="button" href="#">Schedule Demo</a>
-        </div>
-        {{/equal}}
+          <div class="button-cont">
+            {{#notEqual title 'Platinum' }}
+            <a class="primary-button" href="#">
+            Get Started
+            </a>
+            {{/notEqual}}
+            {{#equal title 'Platinum' }}
+            <a class="primary-button" href="#">
+            Schedule Demo
+            </a>
+            {{/equal}}
+          </div>
       </div>
 
       <div class="pricing-col-content">

@@ -20,17 +20,15 @@
     @media only screen and (min-width: $desktop-min-width) {
       width: 25%;
     }
-    &:last-child {
-      .box {
-        background: #3385D6;
-        > * {
-          color: #fff;
-        }
-      }
-    }
-    .box, > * {
-      // reset all margins
-      margin: 0;
+    // &:last-child {
+    //   .box {
+    //     //background: #3385D6;
+    //     > * {
+    //       color: #fff;
+    //     }
+    //   }
+    // }
+    .box, {
       text-align: center;
     }
     .empty-val {
@@ -40,10 +38,13 @@
       }
     }
     .main-box {
-      padding-bottom: 50px;
+      //padding-bottom: 50px;
       @media only screen and (min-width: $desktop-min-width) {
         height: 260px;
-        padding-bottom: 10px;
+        //padding-bottom: 10px;
+      }
+      .box-content {
+        padding: 15px 10px;
       }
       position: relative;
       h2 {
@@ -52,14 +53,12 @@
         margin-bottom: 0.5em;
         position: relative;
         &:after {
-          border-radius: 0 0 10px 10px;
-          bottom: -8px;
-          box-shadow: inset 0 10px 20px -15px rgba(0,0,0,0.15);
-          content: '';
+          content: "";
+          background: image-url('sepshadow_180.png') no-repeat center center;
+          background-size: cover;
+          display: block;
+          width: 100%;
           height: 10px;
-          left: 15%;
-          position: absolute;
-          width: 70%;
         }
       }
       h3 {
@@ -76,10 +75,11 @@
         text-align: center;
       }
       .button-cont {
-        bottom: 10px;
         position: absolute;
-        width: 95%;
-        left: 2.5%;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        padding: 10px 0;
       }
     }
   }
