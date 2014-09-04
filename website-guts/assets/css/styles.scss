@@ -25,14 +25,17 @@
 @import 'pages/integrations-solutions';
 @import 'pages/opt-out';
 @import 'pages/split-testing';
+@import 'pages/mobile';
 @import 'pages/mvt';
 @import 'pages/success';
 @import 'pages/sample-size-calculator';
 @import 'pages/pricing';
+@import 'pages/seo';
 
 /* layouts */
 @import 'layouts/benefits';
 @import 'layouts/jobs';
+@import 'layouts/simple';
 @import 'pages/customer-stories';
 @import 'pages/partners';
 @import 'pages/benefits';
@@ -47,3 +50,4 @@
 @import 'components/tooltip';
 @import 'components/pills';
 @import 'components/contact-form';
+@import 'components/shadow-cta';

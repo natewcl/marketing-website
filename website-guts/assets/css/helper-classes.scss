@@ -8,6 +8,25 @@
 	}
 }
 
+.required {
+	&:after {
+		content: " *";
+    color: rgb(255, 0, 0);
+    display: inline;
+		height: auto;
+		width: auto;
+	}
+}
+
+.show-hide {
+	&.tablet {
+		display: none;
+	}
+	&.desktop {
+		display: none;
+	}
+}
+
 // Tests is vh CSS property is supported
 #vh-test {
 	position: fixed;
@@ -384,8 +403,37 @@ input[type="text"], input[type="url"], input[type="email"], input[type="tel"] {
 	text-transform: lowercase;
 }
 
+.pull-quote {
+	font-size: 1.81em;
+	font-weight: 300;
+	line-height: 1.2;
+}
+
 //classes for processing and error states on forms
 
 .processing-hide, .error-hide {opacity: 0;}
 
 body.processing-state .processing-show, body.error-state .error-show {opacity: 1;}
+
+@media screen and (min-width: 769px) {
+	.show-hide {
+		&.mobile {
+			display: none;
+		}
+		&.tablet {
+			&.inline {
+				display: inline;
+			}
+		}
+	}
+}
+
+@media screen and (min-width: $desktop-min-width) {
+	.show-hide {
+		&.desktop {
+			&.inline {
+				display: inline;
+			}
+		}
+	}
+}

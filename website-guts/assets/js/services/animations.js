@@ -55,7 +55,7 @@ window.optly.mrkt.anim.enterQ = function($enterElm) {
   $q.queue('enter', function(next){
     window.setTimeout(function(){
       $enterElm.addClass('enter');
-    }, 10);
+    }, 50);
     next();
   });
 
@@ -81,7 +81,7 @@ window.optly.mrkt.anim.leaveQ = function($leaveElm) {
   $q.queue('leave', function(next){
     window.setTimeout(function(){
       $leaveElm.addClass('leave');
-    }, 10);
+    }, 50);
     next();
   });
 

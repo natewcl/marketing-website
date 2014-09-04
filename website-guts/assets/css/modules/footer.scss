@@ -3,6 +3,7 @@ footer {
       display: none;
     }
     #footer-nav-cont {
+        @extend .clearfix;
         margin-top: 25px;
         .left-nav {
             width: 100%;
@@ -10,6 +11,9 @@ footer {
         .right-nav {
             width: 100%;
         }
+    }
+    .footer-wrapper {
+        overflow: hidden;
     }
     text-align: center;
     padding: 30px 0;
@@ -23,6 +27,7 @@ footer {
         margin: 0;
     }
     li {
+        text-align: center;
         list-style-type: none;
         margin-bottom: 20px;
     }
@@ -73,6 +78,9 @@ footer {
         }
         p {
             margin: 0 0 2px 0;
+        }
+        li {
+            text-align: left;
         }
         .logo {
             background-size: 108px 23.112px;

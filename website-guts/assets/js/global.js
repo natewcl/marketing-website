@@ -40,11 +40,21 @@ window.optly.mrkt.mobileJS = function(){
 
 		});
 
-		$('#main-nav ul').each(function(){
+    $(window).on('load orientationchange', function() {
+      if(window.innerWidth <= 768) {
+        $('#main-nav ul').each(function(){
 
-				$(this).css('max-height', $(this).height() + 'px');
+            $(this).css('max-height', $(this).height() + 'px');
 
-		});
+        });
+      } else {
+        $('#main-nav ul').each(function(){
+
+            $(this).css('max-height', '');
+
+        });
+      }
+    });
 
 		$('body').addClass('mobile-nav-ready');
 
@@ -127,27 +137,17 @@ window.optly.mrkt.formDataStringToObject = function getJsonFromUrl(string) {
 };
 
 //Test for viewport unit support
-window.Modernizr.addTest('viewportunits', function() { 
+window.Modernizr.addTest('viewportunits', function() {
     var bool;
-    
-    window.Modernizr.testStyles('#modernizr { width: 50vw; }', function(elem, rule) {   
+
+    window.Modernizr.testStyles('#modernizr { width: 50vw; }', function(elem) {
         var width = parseInt(window.innerWidth/2,10),
             compStyle = parseInt((window.getComputedStyle ?
                       getComputedStyle(elem, null) :
                       elem.currentStyle).width,10);
-        
+
         bool= (compStyle === width);
     });
-    
+
     return bool;
-});
-
-$(function(){
-
-	$('#inner-wrapper').fitVids({
-
-		customSelector: 'iframe[src^="//fast.wistia.net"]'
-
-	});
-
 });

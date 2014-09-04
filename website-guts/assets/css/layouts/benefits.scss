@@ -12,7 +12,6 @@ body.benefits-layout {
     top: -5px;
     width: 143px;
     z-index: 19;
-
     li {
       line-height: inherit;
       margin: 0;
@@ -110,6 +109,12 @@ body.benefits-layout {
       margin-top: 20px;
     }
   }
+
+  .attention {
+    a {
+      margin: 10px 0;
+    }
+  }
 }
 
 @media screen and (min-width: $tablet-min-width) {
@@ -131,6 +136,19 @@ body.benefits-layout {
         list-style-position: outside;
         margin: 5px 0 5px 25px;
       }
+    }
+    .attention {
+      a {
+        margin: 0;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: $desktop-min-width) {
+  body.benefits-layout {
+    h5 {
+      margin-bottom: 0;
     }
   }
 }

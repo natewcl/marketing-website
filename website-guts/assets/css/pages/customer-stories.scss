@@ -91,12 +91,8 @@ body.customer-stories-page {
   }
 }
 
-@media only screen and (min-width: $tablet-min-width) {
+@media only screen and (min-width: 769px) {
   body.customer-stories-page {
-    .row {
-      // Make equal height columns, JS fallback
-      display: flex;
-    }
     .top-content {
       h2 {
         margin: 0;
@@ -114,6 +110,23 @@ body.customer-stories-page {
     p {
       font-size: 0.9em;
       line-height: 1.6em;
+    }
+    .row {
+      &.stories {
+          // Make equal height columns, JS fallback
+        display: flex;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: $desktop-min-width) {
+  body.customer-stories-page {
+    .row {
+      &.stories {
+          // Make equal height columns, JS fallback
+        display: flex;
+      }
     }
   }
 }
