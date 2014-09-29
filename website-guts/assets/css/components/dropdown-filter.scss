@@ -11,7 +11,7 @@
     }
   }
   ul {
-    background-color: #FFFFFF;
+    background-color: #fff;
     border: 1px solid rgb(213, 213, 213);
     display: none;
     left: -1px;
@@ -21,7 +21,7 @@
     position: absolute;
     text-align: left;
     width: 120%;
-    z-index: 20;
+    z-index: 120;
     &.active {
       display: block;
     }
@@ -52,8 +52,8 @@
       &.active {
         font-weight: bold;
         &:before {
-          background: $new-blue;
-          border: 1px solid $new-blue;
+          background: $blue;
+          border: 1px solid $blue;
         }
       }
     }

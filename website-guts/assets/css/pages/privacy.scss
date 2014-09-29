@@ -1,20 +1,48 @@
 body.privacy-page {
+
+	h4 {margin-top: 30px;}
 	
 	.opted-out {
 		display: none;
 	}
 	#remarketing-opt-out-cont {
-		h4 {font-size: 1.15em;}
+		h4 {
+			margin: 0;
+			font-size: 1.15em;
+		}
 	}
+
+	&.remarketing-opt-out {
+		.opted-in {
+			display: none;
+		}
+		.opted-out {
+			display: block;
+		}
+	}
+	
+	.privacy-content {
+		ol {padding-left: 0;}
+
+		li {
+			list-style: none;
+			text-align: center;
+		}
+	}
+	
 
 }
-body.privacy-page.remarketing-opt-out {
-	
-	.opted-in {
-		display: none;
-	}
-	.opted-out {
-		display: block;
-	}
 
+@media only screen and (min-width: $desktop-min-width) {
+	body.privacy-page {
+		h4{font-size: 1.2em;}
+		.privacy-content {
+			ol {padding-left: 40px;}
+
+			li {
+				list-style: decimal;
+				text-align: left;
+			}
+		}
+	}
 }

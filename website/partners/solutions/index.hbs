@@ -1,111 +1,90 @@
 ---
 layout: page.hbs
-seo_title: Optimizely Partners
-visible_title: Optimizely Partners
-sub_head: World-class service providers. Empowered customers. Lasting results.
+seo_title: "Solutions Partners"
+visible_title: "Solutions Partners"
+sub_head: ""
 body_class:
-- integrations-solutions
+- "integrations-solutions"
 page_script:
-- solutions.js
+- "solutions.js"
 script_dependencies:
-- //cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.0.0/isotope.pkgd.min.js
+- "//cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.0.0/isotope.pkgd.min.js"
 ---
 
 <div class="columns twelve">
-  <div class="row">
-    <div class="columns six">
-      <h2>{{{partners.solutions.page_heading}}}</h2>
-    </div>
-    <div class="columns six">
-      <div class="pill clearfix big">
-        <a href="{{linkPath}}/partners/integrations">{{{partners.integrations.pill_title}}} ({{#integrations}}{{length pages}}{{/integrations}})</a>
-        <a class="active" href="{{linkPath}}/partners/solutions">{{{partners.solutions.pill_title}}} ({{#solutions}}{{length pages}}{{/solutions}})</a>
-      </div>
-    </div>
-  </div>
-
-  <hr />
 
   <div class="row">
     <div class="columns seven">
-      <p>{{{partners.solutions.page_intro}}}</p>
+      <p>{{{solutions_data.page_intro}}}</p>
     </div>
     <div class="columns five learn-more">
-      {{{partners.solutions.apply_link_intro}}}
-      <a class="big" href="http://pages.optimizely.com/OptimizelySolutionsPartnerRegistration.html">{{{partners.solutions.apply_link_text}}} &gt;</a>
+      {{{solutions_data.apply_link_intro}}}
+      <a class="big" href="{{{solutions_data.apply_link_url}}}">{{{solutions_data.apply_link_text}}} &gt;</a>
     </div>
   </div>
 
   <div class="row">
-    <div class="columns filter">
+    <div class="columns twelve filter">
       <div class="pill clearfix">
-        <div class="heading">Filter By:</div>
-        <div class="dropdown-cont dropdown-cont--region">Region &#9662;
+        <div class="heading">{{{solutions_data.filter.title}}}:</div>
+        <div class="dropdown-cont dropdown-cont--region">{{{solutions_data.filter.region}}} &#9662;
           <ul>
-            <li class="filter-item" data-filter="{{ createClassList 'Asia Pacific'}}">Asia Pacific</li>
-            <li class="filter-item" data-filter="{{ createClassList 'EMEA - France'}}">EMEA - France</li>
-            <li class="filter-item" data-filter="{{ createClassList 'EMEA - Germany'}}">EMEA - Germany</li>
-            <li class="filter-item" data-filter="{{ createClassList 'EMEA - UK'}}">EMEA - UK</li>
-            <li class="filter-item" data-filter="{{ createClassList 'EMEA - Netherlands'}}">EMEA - Netherlands</li>
-            <li class="filter-item" data-filter="{{ createClassList 'EMEA - Other'}}">EMEA - Other</li>
-            <li class="filter-item" data-filter="{{ createClassList 'North America - US East'}}">North America - US East</li>
-            <li class="filter-item" data-filter="{{ createClassList 'North America - US Central'}}">North America - US Central</li>
-            <li class="filter-item" data-filter="{{ createClassList 'North America - US West'}}">North America - US West</li>
-            <li class="filter-item" data-filter="{{ createClassList 'North America - Other'}}">North America - Other</li>
-            <li class="filter-item" data-filter="{{ createClassList 'South America / Central America'}}">South America / Central America</li>
+            {{#each solutions_data.filter.regions}}
+              <li class="filter-item" data-filter="{{ createClassList this }}">{{this}}</li>
+            {{/each}}
           </ul>
         </div>
-        <div class="dropdown-cont">Star Rating &#9662;
+        <div class="dropdown-cont">{{{solutions_data.filter.stars}}} &#9662;
           <ul>
-            <li class="filter-item" data-filter="1-star">
-              <span class="star-cont star-cont--1"></span>
+            <li class="filter-item" data-filter="3-star">
+              <span class="star-cont star-cont--3"></span>
             </li>
             <li class="filter-item" data-filter="2-star">
               <span class="star-cont star-cont--2"></span>
             </li>
-            <li class="filter-item" data-filter="3-star">
-              <span class="star-cont star-cont--3"></span>
+            <li class="filter-item" data-filter="1-star">
+              <span class="star-cont star-cont--1"></span>
             </li>
           </ul>
         </div>
-        <div class="dropdown-cont dropdown-cont--columns">Industry &#9662;
+        <div class="dropdown-cont dropdown-cont--columns">{{{solutions_data.filter.vertical}}} &#9662;
           <ul>
-            <li class="filter-item" data-filter="fullservice">Full Service</li>
-            <li class="filter-item" data-filter="testdevelopment">Test Development</li>
-            <li class="filter-item" data-filter="strategicconsulting">Strategic Consulting</li>
             {{#each tags}}
-            <li class="filter-item" data-filter="{{createClassList tag}}">{{tag}}</li>
+              {{#if tag.length}}
+                <li class="filter-item" data-filter="{{createClassList tag}}">{{tag}}</li>
+              {{/if}}
             {{/each}}
           </ul>
         </div>
-        <a href="#" class="filter--reset tooltip-hover" data-content="Reset filters">X</a>
+        <a href="#" class="filter--reset tooltip-hover" data-content="Reset filters"><span>{{{solutions_data.filter.reset}}} </span>X</a>
       </div>
     </div>
   </div>
 
   <div class="row">
-    <div class="integrations-container container">
+    <div class="integrations-container">
       <div class="integrations-message">
-        <p>No results found</p>
+        <p>{{{solutions_data.filter.no_results}}}</p>
       </div>
       <div class="row partner-grid">
         {{#solutions}}
           {{#each pages}}
-            <div class="partner-grid-elm {{#if data.stars}}{{data.stars}}-star{{/if}} {{createClassList data.region}} {{#each data.tags}}{{createClassList this}}{{/each}}" data-priority="{{data.priority}}">
+            <div class="partner-grid-elm {{#if data.stars}}{{data.stars}}-star{{/if}} {{#each data.locations}}{{createClassList this.location.region}}{{/each}} {{#each data.tags}}{{createClassList this}}{{/each}}" data-priority="{{data.priority}}">
               <div class="title-container">
-                <h4 class="partner-title"><a href="{{linkPath}}/{{this.dest}}">{{data.title}}</a></h4>
-                <div class="partner-location">{{data.city}}{{#if data.city}}{{#if data.state}}, {{/if}}{{/if}}{{data.state}}</div>
+                <h4 class="partner-title"><a href="{{relative ../../page.dest this.dest}}">{{data.title}}</a></h4>
+                {{#each data.locations}}
+                  <div class="partner-location {{#if @first}}active{{/if}}" data-region="{{createClassList this.location.region}}">{{this.location.city}}, {{stateCountry this.location.state this.location.country }}</div>
+                {{/each}}
               </div> <!-- .title-container -->
               <div class="partner-inner-content">
-                <a href="{{linkPath}}/{{this.dest}}" class="partner-logos" style="background-image: url('{{data.logo}}');"></a>
+                <a href="{{relative ../../page.dest this.dest}}" class="partner-logos" style="background-image: url('{{data.logo}}');"></a>
                 <div class="level">
-                  <div class="level-heading">Certification Level: <span class="tooltip-hover" data-content="lorem ipsum dolor">?</span></div>
+                  <div class="level-heading">{{{../../solutions_data.filter.stars}}}: <span data-tooltip title="{{{../../solutions_data.partner_tooltip}}}"></span></div>
                   <div class="star-cont {{#if data.stars}}star-cont--{{data.stars}}{{/if}}"></div>
                 </div>
               </div>
               <div class="button-container">
-                <a href="{{linkPath}}/{{this.dest}}" class="button">Learn More &gt;</a>
-                <!-- {{ this.dest }}-->
+                <a href="{{relative ../../page.dest this.dest}}" class="button">{{{../../solutions_data.more}}} &gt;</a>
               </div>
             </div>
           {{/each}}

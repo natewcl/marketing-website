@@ -1,5 +1,5 @@
 ---
-layout: wrapper_compiled.hbs
+layout: wrapper.hbs
 layout_script: false
 layout_body_class: false
 ---
@@ -9,8 +9,8 @@ layout_body_class: false
       <div class="clearfix page-subheader-cont">
         <h1>{{page.visible_title}}</h1>
         <ul class="sub-header-nav">
-          <li class="sub-nav-about"><a href="{{linkPath}}/customers">Customer List</a></li>
-          <li class="sub-nav-"><a href="{{linkPath}}/customer-stories/">Customer Stories</a></li>
+          <li class="sub-nav-about"><a href="{{linkPath}}/{{page.subnav_first}}">Customer List</a></li>
+          <li class="sub-nav-"><a href="{{linkPath}}/{{page.subnav_last}}">Customer Stories</a></li>
         </ul>
       </div><!---->
     </div><!--/.container-->

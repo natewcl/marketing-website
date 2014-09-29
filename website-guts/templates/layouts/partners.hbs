@@ -3,14 +3,17 @@ layout: wrapper.hbs
 layout_script: false
 layout_body_class:
 - integrations-solutions
-visible_title: Optimizely Partners
-sub_head: World-class service providers. Empowered customers. Lasting results.
 ---
 <div id="main">
   <div id="page-header">
     <div class="container">
-      <h1>{{visible_title}}</h1>
-      {{#if sub_head}}<p>{{sub_head}}</p>{{/if}}
+      {{#if page.data.solutions }}
+        <h1>{{solutions_data.page_heading}}</h1>
+        {{#if solutions_data.sub_head}}<p>{{solutions_data.sub_head}}</p>{{/if}}
+      {{else}}
+        <h1>{{technology_data.page_heading}}</h1>
+        {{#if technology_data.sub_head}}<p>{{technology_data.sub_head}}</p>{{/if}}
+      {{/if}}
     </div><!--/.container-->
   </div><!--/#page-header-->
   <div id="page-header-gradient"></div>
@@ -21,31 +24,42 @@ sub_head: World-class service providers. Empowered customers. Lasting results.
           <div class="columns four">
             <div class="partners-back">
               {{#if page.data.solutions }}
-                <a href="{{linkPath}}/partners/solutions">&lt; See all Solutions Partners</a>
+                <a href="{{linkPath}}/partners/solutions/">&lt; {{{solutions_data.see_all}}}</a>
               {{else}}
-                <a href="{{linkPath}}/partners/integrations">&lt; See all Integrations Partners</a>
+                <a href="{{linkPath}}/partners/technology/">&lt; {{{technology_data.see_all}}}</a>
               {{/if}}
             </div>
 
             <div class="partners-logo" style="background-image: url('{{logo}}');"></div>
 
             <div class="partners-link">
-              <a href="{{website_link}}">{{website_display}}</a>
+              <p><a href="{{website_link}}">{{website_display}}</a></p>
             </div>
 
             <div class="partners-contact">
-              {{#if phone}}{{phone}} <br />{{/if}}
-              {{#if email}}<a href="mailto:{{email}}">{{email}}</a> <br />{{/if}}
-              <br />
-              {{#if address1}}{{address1}} <br />{{/if}}
-              {{#if address2}}{{address2}} <br />{{/if}}
-              {{#if city}}{{city}}, {{/if}}{{#if state}}{{state}} {{/if}}{{zip}}<br />
+              {{#each page.data.locations}}
+                <div class="partners-location">
+                  <p>
+                    {{#if this.location.phone}}{{this.location.phone}} <br />{{/if}}
+                    {{#if this.location.email}}<a href="mailto:{{this.location.email}}">{{this.location.email}}</a> <br />{{/if}}
+                    <br />
+                    {{#if this.location.address1}}{{this.location.address1}} <br />{{/if}}
+                    {{#if this.location.address2}}{{this.location.address2}} <br />{{/if}}
+                    {{#if this.location.city}}{{this.location.city}}, {{/if}}{{stateCountry this.location.state this.location.country }} {{this.location.zip}}<br />
+                  </p>
+                </div>
+              {{/each}}
+              {{#if page.data.contact}}
+                {{breaklines page.data.contact}}
+              {{/if}}
             </div>
 
-            {{#if languages}}
+            {{#if page.data.languages}}
               <div class="partners-languages">
-                <strong>LANGUAGES</strong> <br />
-                {{#eachNoTrailing languages ", "}}{{.}}, {{/eachNoTrailing}}
+                <p>
+                  <strong>{{{solutions_data.languages}}}</strong> <br />
+                  {{#eachNoTrailing page.data.languages ", "}}{{.}}, {{/eachNoTrailing}}
+                </p>
               </div>
             {{/if}}
           </div>
@@ -55,25 +69,25 @@ sub_head: World-class service providers. Empowered customers. Lasting results.
             <div class="level">
               {{#if page.data.solutions }}
                 {{#if stars}}
-                  <div class="level-heading">Certification Level: <span class="tooltip-hover" data-content="lorem ipsum dolor">?</span></div>
+                  <div class="level-heading">{{{solutions_data.filter.stars}}}: <span data-tooltip title="{{{solutions_data.partner_tooltip}}}"></span></div>
                   <div class="star-cont {{#if stars}}star-cont--{{stars}}{{/if}} star-left"></div>
                 {{/if}}
               {{/if}}
             </div>
 
-            {{#markdown}}
+            {{#omarkdown path=linkPath}}
               {{> body}}
-            {{/markdown}}
+            {{/omarkdown}}
 
             {{#if page.tags}}
             <div class="partners-tags">
-              {{#eachNoTrailing page.tags ", </span>"}}<span>{{this}}, </span>{{/eachNoTrailing}}
+              <p>{{#eachNoTrailing page.tags ", </span>"}}<span>{{this}}, </span>{{/eachNoTrailing}}</p>
             </div>
             {{/if}}
 
             {{#if kb_article}}
             <a class="button" href="{{kb_article}}">
-              Read Knowlege Base Article
+              {{{solutions_data.kb_article}}}
             </a>
             {{/if}}
           </div>

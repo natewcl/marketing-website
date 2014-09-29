@@ -1,23 +1,16 @@
-var $signinModal = $('[data-optly-modal="signin"]');
+var signinDialogHelperInst = window.optly.mrkt.form.signin({formId: 'signin-form'});
 
-function requestSignin(e) {
-  e.preventDefault();
-
-  var deferred = window.optly.mrkt.services.xhr.makeRequest({
-    type: 'POST',
-    url: '/account/signin'
-  });
-
-
-  deferred.then(function(data) {
-    if (data.success === 'true') {
-      if(sessionStorage !== undefined) {
-        sessionStorage.modalType = '';
-      }
-      window.location = 'https://www.optimizely.com/dashboard';
+var signinForm = new Oform({
+  selector: '#signin-form',
+  customValidation: {
+    password: function(elm) {
+      return signinDialogHelperInst.passwordValidation(elm);
     }
-  });
+  }
+});
 
-}
+signinForm.on('validationerror', w.optly.mrkt.Oform.validationError);
 
-$signinModal.delegate('[data-modal-btn="signin"]', 'click', requestSignin);
+signinForm.on('load', signinDialogHelperInst.load.bind(signinDialogHelperInst));
+
+signinForm.on('done', w.optly.mrkt.Oform.done);

@@ -1,8 +1,7 @@
 body.integrations-solutions {
 
   .integrations-container {
-    padding: 0;
-    // todo(ccorda): is there a collapse class?
+
     .integrations-message {
       display: none;
       &.visible {
@@ -19,8 +18,11 @@ body.integrations-solutions {
 
   .filter {
     .pill {
-      width: 450px;
-      // todo(ccorda): move this to pill.scss as a general responsive solution
+      .filter--reset {
+        span {
+          display: none;
+        }
+      }
       .dropdown-cont {
         &.dropdown-cont--region {
           ul {
@@ -39,18 +41,58 @@ body.integrations-solutions {
             }
           }
         }
+        @media (max-width: 600px) {
+          &.dropdown-cont--region {
+            ul {
+              width: 100%;
+            }
+          }
+          &.dropdown-cont--columns {
+            ul {
+              column-count: 1;
+              width: 100%;
+            }
+          }
+          li {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            &:before {
+              top: 15px;
+            }
+          }
+        }
       }
-      @media (max-width: 420px) {
+
+      @media (max-width: 600px) {
         width: 100%;
         .heading {
           width: 100%;
           border-right: 1px solid #d5d5d5;
           border-radius: 0;
+          margin-bottom: 10px;
+          padding-top: 12px;
+          padding-bottom: 12px;
         }
         .dropdown-cont {
           width: 100%;
           border-radius: 0;
           border: 1px solid #d5d5d5;
+          margin-bottom: 10px;
+          padding-top: 12px;
+          padding-bottom: 12px;
+        }
+        .filter--reset {
+          display: inline-block;
+          float: none;
+          clear: both;
+          margin-left: auto;
+          margin-right: auto;
+          padding-top: 5px;
+          padding-bottom: 5px;
+          border-radius: 0;
+          span {
+            display: inline-block;
+          }
         }
       }
     }
@@ -97,6 +139,7 @@ body.integrations-solutions {
     .tooltip-hover {
       height: 15px;
       width: 15px;
+      top: -5px;
       &:hover {
         cursor: help;
       }
@@ -116,7 +159,6 @@ body.integrations-solutions {
       padding: 0.8em 0;
       font-size: 14px;
       font-weight: 300;
-      letter-spacing: -1.2px;
 
       span {
         font-weight: bold;
@@ -130,7 +172,8 @@ body.integrations-solutions {
 
       h4 {
         text-align: center;
-        font-size: 1.5em;
+        font-size: 16px;
+        margin: 0;
       }
     }
 
@@ -141,34 +184,39 @@ body.integrations-solutions {
     }
 
     .partner-title a {
-      color: $text-color;
+      color: #4D6C81;
+      font-weight: 400;
     }
 
     .partner-location {
       color: #a9a9a9;
       text-transform: uppercase;
       font-weight: 400;
+      display: none;
+      &.active {
+        display: block;
+      }
     }
 
     .partner-inner-content {
-      padding: 20px;
+      padding: 10px;
       flex-grow: 2;
     }
 
     .partner-logos {
       background-repeat: no-repeat;
       background-size: contain;
-      background-position: center bottom;
-      margin: 0 auto;
+      background-position: center center;
+      margin: 10px auto;
       height: 80px;
       width: 100%;
-      max-width: 250px;
+      max-width: 220px;
       display: block;
     }
 
     .button {
       color: rgb(255, 255, 255);
-      font-size: 18px;
+      font-size: 14px;
       text-shadow: 0 2px 0 rgb(25, 82, 158);
       width: 100%;
     }
@@ -183,7 +231,7 @@ body.integrations-solutions {
   }
 
   .single-partner-container {
-    background-color: #FFFFFF;
+    background-color: #fff;
     border: 1px solid rgb(213, 213, 213);
     border-radius: 5px;
     padding: 20px 40px;
@@ -191,13 +239,18 @@ body.integrations-solutions {
     .partners-logo {
       background-repeat: no-repeat;
       background-size: contain;
-      background-position: center bottom;
+      background-position: left bottom;
       margin: 0 auto;
       height: 80px;
       width: 100%;
       max-width: 250px;
       display: block;
+
+      @media (max-width: 960px) {
+        background-position: center bottom;
+      }
     }
+
 
     .partners-back,
     .partners-logo,
@@ -206,11 +259,18 @@ body.integrations-solutions {
       margin-bottom: 1em;
     }
 
+    .partners-location {
+      margin-top: 1em;
+      border-top: 1px solid rgb(213, 213, 213);;
+      padding-top: 1em;
+    }
+
     .partners-misc,
     .partners-contact,
     .partners-languages,
     .partners-tags {
       color: #a9a9a9;
+      font-size: 14px;
       a {
         color: #a9a9a9;
       }
@@ -218,21 +278,34 @@ body.integrations-solutions {
   }
 
   a.button { // TODO: this should apply automatically
-    color: #FFFFFF;
+    color: #fff;
   }
 
   .level {
-    margin: 30px 0 10px 0;
+    margin: 30px 0 20px 0;
 
     .level-heading {
       color: #a9a9a9;
       font-size: 12px;
       font-weight: 400;
       text-transform: uppercase;
+
+      div {
+        text-transform: none;
+      }
+    }
+
+    .tooltip-hover {
+      height: 15px;
+      width: 15px;
+      top: -5px;
+      &:hover {
+        cursor: help;
+      }
     }
 
     .star-cont {
-      height: 20px;
+      height: 16px;
       margin: 5px 0;
       @media (max-width: 960px) {
         background-position: center center;

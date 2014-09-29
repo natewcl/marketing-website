@@ -1,0 +1,19 @@
+#contact-form {
+  ul {
+    text-align: center;
+  }
+  li {
+    text-align: left;
+  }
+  .form-neighbors {
+    display: inline-block;
+    width: 49%;
+    overflow: visible!important;
+    &.first {
+      padding-right: 5px;
+    }
+    &.last {
+      padding-left: 5px;
+    }
+  }
+}

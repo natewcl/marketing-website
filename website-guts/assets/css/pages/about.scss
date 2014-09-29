@@ -15,6 +15,26 @@ body.about-page {
 
 }
 
+@media only screen and (min-width: $tablet-min-width) {
+
+	body.about-page {
+
+		#the-highlights {
+			h5 {
+				margin: 0;
+			}
+			ul {
+				margin-left: 20px;
+				font-size: 0.8em;
+				font-weight: 100;
+				line-height: 1.5em;
+			}
+		}
+
+	}
+
+}
+
 @media only screen and (min-width: $desktop-min-width) {
 
 	body.about-page {

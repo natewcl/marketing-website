@@ -1,4 +1,4 @@
-#Optimizely marketing website
+#Optimizely marketing website 
 
 ![Optimizely logo](http://styleguide.optimizely.com/img/logos/optimizely/blue/optimizely_logo_BLUE.svg)
 

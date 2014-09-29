@@ -23,38 +23,48 @@ window.optly.mrkt.mobileJS = function(){
 			window.FastClick.attach(document.body);
 
 		});
+  }
 
-		$('body').delegate('.mobile-nav-toggle', 'click', function(e){
+  var mobileNavBound = false;
+  $(window).on('load resize', function() {
+    if(window.innerWidth <= 960) {
+        $('body').addClass('mobile-nav-ready');
 
-				$('body').toggleClass('nav-open');
+        if(!mobileNavBound) {
+            $('.mobile-nav-toggle').on('click', function(e){
 
-				e.preventDefault();
+            $('body').toggleClass('nav-open');
 
-		});
+                e.preventDefault();
 
-		$('.user-nav-toggle').click(function(e){
+            });
 
-				$('body').toggleClass('user-nav-open');
+            $('.user-nav-toggle').on('click', function(e){
 
-				e.preventDefault();
+                $('body').toggleClass('user-nav-open');
 
-		});
+                e.preventDefault();
 
-		$('#main-nav ul').each(function(){
+            });
 
-				$(this).css('max-height', $(this).height() + 'px');
 
-		});
 
-		$('body').addClass('mobile-nav-ready');
+            $('#main-nav > li').on('click', function(){
 
-		$('#main-nav > li').click(function(){
+                $(this).toggleClass('active').find('ul').toggleClass('active');
 
-				$(this).toggleClass('active').find('ul').toggleClass('active');
+            });
 
-		});
+            mobileNavBound = true;
+        }
 
-	}
+
+    } else {
+        $('body').removeClass('mobile-nav-ready');
+    }
+
+  });
+
 
 };
 
@@ -125,3 +135,35 @@ window.optly.mrkt.formDataStringToObject = function getJsonFromUrl(string) {
   return result;
 
 };
+
+//Test for viewport unit support
+window.Modernizr.addTest('viewportunits', function() {
+    var bool;
+
+    window.Modernizr.testStyles('#modernizr { width: 50vw; }', function(elem) {
+        var width = parseInt(window.innerWidth/2,10),
+            compStyle = parseInt((window.getComputedStyle ?
+                      getComputedStyle(elem, null) :
+                      elem.currentStyle).width,10);
+
+        bool= (compStyle === width);
+    });
+
+    return bool;
+});
+
+window.optly_q.push([function(){
+
+	if(typeof w.optly_q.acctData === 'object'){
+
+		window.analytics.identify(w.optly_q.acctData.email, {
+
+			name: w.optly_q.acctData.name,
+
+			email: w.optly_q.acctData.email
+
+		});
+
+	}
+
+}]);

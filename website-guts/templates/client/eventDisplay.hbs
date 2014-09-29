@@ -1,5 +1,5 @@
 {{#each events}}
-<div class="event-cont">
+<div class="event-cont ugc">
   <div class="left">
     <time>{{startMonth}} {{startDay}} - {{endMonth}} {{endDay}}, {{endYear}}</time>
     <p class="venue">{{venue}}</p>
@@ -7,7 +7,7 @@
   </div>
   <div class="right">
     <h4><a href="{{link}} target="_blank">{{title}}</a></h4>
-    <p>{{description}}</p>
+    <p>{{{description}}}</p>
   </div>
 </div><!--/.event-cont-->
 {{/each}}

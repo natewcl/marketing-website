@@ -1,5 +1,5 @@
 ---
-layout: wrapper_compiled.hbs
+layout: wrapper.hbs
 layout_script: false
 layout_body_class: false
 faq_navigation:
@@ -8,7 +8,7 @@ faq_navigation:
     url: /gettingstarted
 -
     text: Webinar Signup
-    url: https://www.optimizely.com/resources/live-demo-webinar
+    url: /resources/live-demo-webinar
 -
     text: FAQ
     url: /faq
@@ -29,7 +29,7 @@ faq_navigation:
                 <h1>{{page.visible_title}}</h1>
                 <ul class="sub-header-nav">
                     {{#each faq_navigation}}
-                    <li><a href="{{url}}">{{text}}</a></li>
+                    <li><a href="{{#isUrl url}}{{../../linkPath}}{{/isUrl}}{{url}}">{{text}}</a></li>
                     {{/each}}
                 </ul>
             </div><!---->
