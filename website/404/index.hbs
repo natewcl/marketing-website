@@ -3,4 +3,6 @@ layout: 404.hbs
 body_class:
 - not found
 ---
-Test
+{{#each 404.helpful_links}}
+  <div>{{this}}</div>
+{{/each}}

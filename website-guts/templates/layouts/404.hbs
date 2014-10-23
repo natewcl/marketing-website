@@ -4,4 +4,21 @@ layout_body_class:
 - error-404
 layout_script: false
 ---
-<div id="lead-image"></div>
+<div id="main">
+  <div id="lead-image"></div>
+  <div class="row text-row">
+    <div class="columns four">
+      {{#each 404.helpful_links}}
+        <div>{{this}}</div>
+      {{/each}}
+    </div>
+    <div class="columns four">
+      {{#each 404.suggestions}}
+        <div>{{this}}</div>
+      {{/each}}
+    </div>
+    <div class="columns four">
+      Search
+    </div>
+  </div>
+</div>
