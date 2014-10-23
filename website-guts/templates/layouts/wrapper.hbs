@@ -23,11 +23,13 @@ layout_modals:
               }
             };
         </script>
-        <script type="text/javascript">
-            window.analytics=window.analytics||[],window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),window.analytics.push(a),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(t){if(!document.getElementById("analytics-js")){var a=document.createElement("script");a.type="text/javascript",a.id="analytics-js",a.async=!0,a.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.io/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n)}},window.analytics.SNIPPET_VERSION="2.0.9",
-            window.analytics.load('{{environmentVariables.segmentProjectID}}');
-            window.analytics.page();
-        </script>
+        {{#unless no_segment}}
+          <script type="text/javascript">
+              window.analytics=window.analytics||[],window.analytics.methods=["identify","group","track","page","pageview","alias","ready","on","once","off","trackLink","trackForm","trackClick","trackSubmit"],window.analytics.factory=function(t){return function(){var a=Array.prototype.slice.call(arguments);return a.unshift(t),window.analytics.push(a),window.analytics}};for(var i=0;i<window.analytics.methods.length;i++){var key=window.analytics.methods[i];window.analytics[key]=window.analytics.factory(key)}window.analytics.load=function(t){if(!document.getElementById("analytics-js")){var a=document.createElement("script");a.type="text/javascript",a.id="analytics-js",a.async=!0,a.src=("https:"===document.location.protocol?"https://":"http://")+"cdn.segment.io/analytics.js/v1/"+t+"/analytics.min.js";var n=document.getElementsByTagName("script")[0];n.parentNode.insertBefore(a,n)}},window.analytics.SNIPPET_VERSION="2.0.9",
+              window.analytics.load('{{environmentVariables.segmentProjectID}}');
+              window.analytics.page();
+          </script>
+        {{/unless}}
         <script>{{#scriptinjector '../assets/js/services/user_state.js' true}}{{/scriptinjector}}</script>
         <script src="//cdn.optimizely.com/js/{{environmentVariables.optimizelyProjectID}}.js"></script>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -74,8 +76,8 @@ layout_modals:
                             </div>
                             <div id="utility-nav-cont">
                                 <ul class="signed-out-content utility-nav nav" data-show-user-state="logged-out">
-                                    <li class="first"><a data-modal-click="signup">Sign Up</a></li>
-                                    <li class="last"><a data-modal-click="signin">Log In</a></li>
+                                  {{#unless no_signup}}<li class="first"><a data-modal-click="signup">Sign Up</a></li>{{/unless}}
+                                  {{#unless no_signin}}<li class="last"><a data-modal-click="signin">Log In</a></li>{{/unless}}
                                 </ul><!--/.signed-out-content-->
                                 <ul id="signed-in-utility" class="signed-in-content utility-nav nav"></ul><!--/.signed-in-content-->
                             </div><!--/#utility-nav-cont-->
@@ -233,7 +235,7 @@ layout_modals:
           optly.mrkt = optly.mrkt || {};
           optly.mrkt.assetsDir = '{{assetsDir}}';
         </script>
-        <script src="{{assetsDir}}/js/bundle.js" defer></script>
+        {{#unless no_bundlejs}}<script src="{{assetsDir}}/js/bundle.js" defer></script>{{/unless}}
         {{#if page.script_dependencies}}
         {{#each page.script_dependencies}}
         <script src="{{.}}" defer></script>
