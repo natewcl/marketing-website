@@ -8,17 +8,25 @@ layout_script: false
   <div id="lead-image"></div>
   <div class="row text-row">
     <div class="columns four">
+      <div class="column-title">Helpful Links</div>
       {{#each 404.helpful_links}}
         <div>{{this}}</div>
       {{/each}}
     </div>
     <div class="columns four">
+      <div class="column-title">Suggestions</div>
       {{#each 404.suggestions}}
         <div>{{this}}</div>
       {{/each}}
     </div>
     <div class="columns four">
-      Search
+      <script type="text/javascript">
+        var GOOG_FIXURL_LANG = 'en';
+        var GOOG_FIXURL_SITE = 'http://www.optimizely.com'
+      </script>
+      <script type="text/javascript"
+        src="http://linkhelp.clients.google.com/tbproxy/lh/wm/fixurl.js">
+      </script>
     </div>
   </div>
 </div>
