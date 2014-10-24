@@ -1,11 +1,5 @@
 ---
 helpful_links:
-  - "one"
-  - "two"
-  - "three"
-
-suggestions:
-  - "suggestion 1"
-  - "suggestion 2"
-  - "suggestion 3"
-  - "suggestion 4"
+  - <a href="http://blog.optimizely.com/">Blog</a>
+  - <a href="https://help.optimizely.com/hc/en-us">Knowledge Base</a>
+  - <a href="http://community.optimizely.com/">Community</a>

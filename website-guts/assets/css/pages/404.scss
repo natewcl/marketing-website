@@ -10,4 +10,27 @@ body.error-404 {
   .text-row {
     text-align: center;
   }
+
+  .column-title {
+    font-size: 1.6em;
+    margin-top: 0.7em;
+  }
+
+  .other-things, .search-goog b {
+  /*.search-goog script + {*/
+    display: none;
+  }
+
+  .search-goog {
+    list-style: none;
+  }
+
+  .columns {
+    margin-bottom: 1.2em;
+  }
+
+  .helpful-item {
+    width: 31%;
+    margin: 0 auto;
+  }
 }
