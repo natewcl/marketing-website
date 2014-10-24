@@ -191,6 +191,10 @@ module.exports = function(grunt) {
         files: ['<%= config.guts %>/assets/js/**/*.js', '!<%= config.guts %>/assets/js/services/user_state.js', '<%= config.temp %>/assets/js/**/*.js'],
         tasks: ['config:dev', 'jshint:clientDev', 'jshint:server', 'handlebars', 'concat', 'clean:postBuild']
       },
+      json: {
+        files: ['<%= config.guts %>/assets/json/**/*.json'],
+        tasks: ['config:dev', 'jsonlint', 'copy:json']
+      },
       clientHandlebarsTemplates: {
         files: ['<%= config.guts %>/templates/client/**/*.hbs'],
         tasks: ['config:dev', 'jshint', 'handlebars', 'concat', 'clean:postBuild']
@@ -325,6 +329,22 @@ module.exports = function(grunt) {
 
                   res.writeHead(200, {'Content-Type': 'application/json'});
                   res.end( grunt.file.read('website-guts/endpoint-mocks/jobscoreData.json') );
+
+                } else if( req.url === '/time-series/one.json' ){
+
+                  res.writeHead(200, {'Content-Type': 'application/json'});
+                  res.end( grunt.file.read('dist/assets/json/experiment-time-series/one.json') );
+
+                  /*
+                  var JSONPath = req.url.split('/json/');
+                  if( grunt.file.read('dist/assets/json/' + JSONPath) ){
+                    res.writeHead(200, {'Content-Type': 'application/json'});
+                    res.end( grunt.file.read('dist/assets/json/' + JSONPath) );
+                  } else {
+                    res.writeHead(404, {'Content-Type': 'text/html'});
+                    res.end('Not found');
+                  }
+                  */
 
                 } else{
 
@@ -512,6 +532,16 @@ module.exports = function(grunt) {
           },
           {src: ['<%= config.guts %>/assets/img/favicon.ico'], dest: '<%= config.dist %>/favicon.ico'},
         ]
+      },
+      json: {
+        files: [
+          {
+            cwd: '<%= config.guts %>/assets/json/',
+            src: '**',
+            dest: '<%= config.dist %>/assets/json/',
+            expand: true
+          }
+        ]
       }
     },
     clean: {
@@ -618,6 +648,11 @@ module.exports = function(grunt) {
         files: {
           src: ['<%= config.guts %>/helpers/*.js']
         }
+      }
+    },
+    jsonlint: {
+      json: {
+        src: ['<%= config.guts %>/assets/json/**/*.json']
       }
     },
     concat: {
@@ -852,6 +887,7 @@ module.exports = function(grunt) {
     'config:staging',
     'jshint:clientDev',
     'jshint:server',
+    'jsonlint',
     'clean:preBuild',
     'assemble',
     'handlebars',
@@ -869,6 +905,7 @@ module.exports = function(grunt) {
     'config:smartlingStaging',
     'jshint:clientDev',
     'jshint:server',
+    'jsonlint',
     'clean:preBuild',
     'assemble',
     'handlebars',
@@ -885,6 +922,7 @@ module.exports = function(grunt) {
     'config:dev',
     'jshint:clientDev',
     'jshint:server',
+    'jsonlint',
     'clean:preBuild',
     'assemble',
     'handlebars',
@@ -902,6 +940,7 @@ module.exports = function(grunt) {
     'config:production',
     'jshint:clientProd',
     'jshint:server',
+    'jsonlint',
     'clean:preBuild',
     'assemble',
     'handlebars',
@@ -917,27 +956,10 @@ module.exports = function(grunt) {
   ]);
 
   grunt.registerTask('test', [
-    'config:dev',
-    'jshint:clientDev',
-    'jshint:server',
-    'clean:preBuild',
-    'assemble',
-    'handlebars',
-    'concat',
-    'sass:dev',
-    'replace',
-    'autoprefixer',
-    'copy',
-    'clean:postBuild',
-    'connect:resemble',
-    'resemble'
-  ]);
-
-
-  grunt.registerTask('test', [
     'config:production',
     'jshint:clientProd',
     'jshint:server',
+    'jsonlint',
     'clean:preBuild',
     'assemble',
     'handlebars',
