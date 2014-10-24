@@ -17,18 +17,16 @@ function CustomSearchConstructor() {
     // Send the request to the custom search API
     $.getJSON(API_URL, queryParams, function(response) {
       if (response.items && response.items.length) {
-        console.log(response.items[0].link);
+        $('.suggestions').append('<li><a href="' + response.items[0].link + '">' + response.items[0].title + '</a></li>');
+        $('.suggestions').append('<li><a href="' + response.items[1].link + '">' + response.items[1].title + '</a></li>');
+        $('.suggestions').append('<li><a href="' + response.items[2].link + '">' + response.items[2].title + '</a></li>');
       }
     });
   };
 }
 
 var path = window.location.pathname;
-console.log("&&&&&&&&&&&&&&&&&");
-console.log(path);
 var phrase = decodeURIComponent(path.replace(/\/+/g, ' ').trim());
-console.log("%%%%%%%%%%%%%%%%%%%%");
-console.log(phrase);
 
 var customSearch = new CustomSearchConstructor();
-customSearch.search('new');
+customSearch.search('jobs');
