@@ -74,7 +74,7 @@ window.optly.mrkt.form.HelperFactory = function(scopeObj) {
     },
 
     processingRemove: function(argsObj) {
-      if( this.bodyClass.contains('processing-state') ) {
+      if( this.bodyClass.contains('processing-state') || this.bodyClass.contains('oform-processing') ) {
         if(( argsObj && argsObj.callee === 'done' && ( this.bodyClass.contains('oform-error') || this.bodyClass.contains('error-state') ) ) || argsObj.callee == 'load' || argsObj.callee == 'error') {
           this.bodyClass.remove('processing-state');
           if(!argsObj || !argsObj.retainDisabled) {

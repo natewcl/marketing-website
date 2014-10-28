@@ -1,95 +1,26 @@
 w.optly.mrkt.inlineFormLabels();
 
-$('[name="hidden"]').val('touched');
-
 document.querySelector('[name="hidden"]').value = 'touched';
 
-var xhrInitiationTime;
+var freeTrialHelperInst = window.optly.mrkt.form.freeTrial({formId: 'seo-form'});
 
 //form
 new Oform({
   selector: '#seo-form'
 })
 .on('before', function(){
-  w.analytics.track('/free-trial/submit', {
-    category: 'account',
-    label: w.optly.mrkt.utils.trimTrailingSlash(w.location.pathname)
-  });
-  xhrInitiationTime = new Date();
+  freeTrialHelperInst.before();
   return w.optly.mrkt.Oform.before();
 })
 .on('validationerror', w.optly.mrkt.Oform.validationError)
 .on('error', function(){
-  $('#seo-form .error-message').text('An unknown error occured.');
   $('body').addClass('oform-error').removeClass('oform-processing');
-})
-.on('load', function(event){
-  var xhrElapsedTime,
-      response;
-  xhrElapsedTime = new Date() - xhrInitiationTime;
-  try {
-    response = JSON.parse(event.target.responseText);
-  } catch(error){
-    w.analytics.track(w.optly.mrkt.utils.trimTrailingSlash(w.location.pathname), {
-      category: 'api error',
-      label: 'json parse error: ' + error,
-    });
-  }
-  w.analytics.track('/account/free_trial_create', {
-    category: 'api response time',
-    value: xhrElapsedTime
+  freeTrialHelperInst.processingRemove({callee: 'error'});
+  freeTrialHelperInst.showOptionsError('An unexpected error occurred. Please contact us if the problem persists.');
+  window.analytics.track(w.optly.mrkt.utils.trimTrailingSlash(w.location.pathname), {
+    category: 'api error',
+    label: 'free trial xhr error'
   });
-  if(response){
-    if(event.target.status === 200){
-      //remove error class from body?
-      w.optly.mrkt.Oform.trackLead({
-        email: d.getElementById('email').value,
-        url: d.getElementById('url').value,
-        name: d.getElementById('name').value,
-        phone: d.getElementById('phone').value
-      }, event);
-      /* legacy reporting - to be deprecated */
-      w.analytics.track('/free-trial/success', {
-        category: 'account',
-        label: w.location.pathname
-      }, {
-        Marketo: true
-      });
-      w.Munchkin.munchkinFunction('visitWebPage', {
-        url: '/free-trial/success'
-      });
-      /* end legacy reporting */
-      setTimeout(function(){
-        w.location = '/edit?url=' + encodeURIComponent(d.getElementById('url').value);
-      }, 500);
-    } else {
-      w.analytics.track(w.optly.mrkt.utils.trimTrailingSlash(w.location.pathname), {
-        category: 'api error',
-        label: 'status not 200: ' + event.target.status
-      });
-      if(response.error && typeof response.error === 'string'){
-        //update error message, apply error class to body
-        $('#seo-form .error-message').text(response.error);
-        $('body').addClass('oform-error').removeClass('oform-processing');
-        w.analytics.track(w.optly.mrkt.utils.trimTrailingSlash(w.location.pathname), {
-          category: 'api error',
-          label: 'response.error: ' + response.error
-        });
-      } else {
-        $('#seo-form .error-message').text('An unknown error occured.');
-        $('body').addClass('oform-error').removeClass('oform-processing');
-      }
-    }
-  }
 })
-.on('done', function(){
-  if($('body').hasClass('oform-error')){
-    $('body').removeClass('oform-processing');
-    //report that there were errors in the form
-    w.analytics.track('seo-form validation error', {
-      category: 'form error',
-      label: w.optly.mrkt.utils.trimTrailingSlash(w.location.pathname),
-      value: $('input.oform-error-show').length
-    });
-  }
-});
+.on('load', freeTrialHelperInst.load.bind(freeTrialHelperInst))
+.on('done', freeTrialHelperInst.done.bind(freeTrialHelperInst));
